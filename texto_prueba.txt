@@ -1,0 +1,215 @@
+En este trabajo se presenta  el  análisis,  diseño  e  implementación  de  TariyKDD,una herramienta genérica para el Descubrimiento de conocimiento en bases de datos, débilmente 
+acoplada con el SGBD PostgreSQL. 
+
+TariyKDD comprende cuatro módulos que cubren la conexión, a archivos planos y bases de 
+datos relacionales, un módulo de utilidades con clases y librerías comunes, un módulo kernel 
+que reune las etapas de preprocesamiento, minería y visualización, y el módulo de interfaz 
+gráfica de usuario.
+
+Dentro del kernel de minería se implementan 5 algoritmos,  Apriori, FPGrowth y EquipAsso 
+para asociación y C4.5 y Mate para clasificación.
+
+Se  evalúa  el  rendimiento  de  los  algoritmos  EquipAsso,  un  algoritmo  para  el  cálculo  de 
+conjuntos  de  ítems frecuentes,  y  Mate,  un  algoritmo para  la  construcción de  arboles  de 
+clasificación,  basados  en  nuevos  operadores  del  álgebra  relacional,  con  respecto  a  los 
+algoritmos Apriori y FP-Growth y C4.5, respectivamente.
+
+
+1. INTRODUCCION
+
+El proceso de extraer conocimiento a partir de grandes volúmenes de datos ha sido 
+reconocido por muchos investigadores como un tópico de investigación clave en los 
+sistemas  de  bases  de  datos,  y  por  muchas  compañías  industriales  como  una 
+importante área y una oportunidad para obtener mayores ganancias [42].
+
+El Descubrimiento de Conocimiento en Bases de Datos (DCBD) es básicamente un 
+proceso automático  en el  que se combinan descubrimiento  y  análisis.  El  proceso 
+consiste en extraer patrones en forma de reglas o funciones, a partir de los datos, 
+para  que el  usuario  los  analice.  Esta  tarea  implica  generalmente  preprocesar  los 
+datos, hacer minería de datos (data mining) y presentar resultados [3, 2, 7, 23, 31]. El 
+DCBD se puede aplicar en diferentes dominios por ejemplo, para determinar perfiles 
+de clientes fraudulentos (evasión de impuestos), para descubrir relaciones implícitas 
+existentes  entre  síntomas  y  enfermedades,  entre  características  técnicas  y 
+diagnóstico  del  estado  de  equipos  y  máquinas,  para  determinar  perfiles  de 
+estudiantes  ”académicamente  exitosos”  en  términos  de  sus  características 
+socioeconómicas,  para  determinar  patrones  de  compra  de  los  clientes  en  sus 
+canastas de mercado, entre otras.
+
+Las  investigaciones  en  DCBD,  se  centraron  inicialmente  en  definir  nuevas 
+operaciones  de  descubrimiento  de  patrones  y  desarrollar  algoritmos  para  estas. 
+Investigaciones posteriores se han focalizado en el problema de integrar DCBD con 
+Sistemas  Gestores  de  Bases  de  Datos  (SGBD)  ofreciendo  como  resultado  el 
+desarrollo de herramientas DCBD cuyas arquitecturas se pueden clasificar en una de 
+tres  categorías:  débilmente  acopladas,  medianamente  acopladas  y  fuertemente 
+acopladas con el SGBD [41].
+
+Una herramienta DCBD debe integrar  una variedad de componentes (técnicas de 
+minería de datos, consultas, métodos de visualización, interfaces, etc.), que juntos 
+puedan eficientemente identificar y extraer patrones interesantes y útiles de los datos 
+almacenados en las bases de datos. De acuerdo a las tareas que desarrollen, las 
+herramientas DCBD se clasifican en tres grupos: herramientas genéricas de tareas 
+sencillas,  herramientas  genéricas  de  tareas  múltiples  y  herramientas  de  dominio 
+específico [31].
+
+En  este  documento  se  presenta  el  trabajo  de  grado  para  optar  por  el  título  de 
+Ingeniero  de  Sistemas.  Fruto  de  la  presente  investigación  es  el  desarrollo  de 
+”TariyKDD: Una herramienta genérica de Descubrimiento de Conocimiento en Bases 
+de Datos débilmente  acoplada con el  SGBD PostgreSQL”,  en la  cual  también se 
+implementaron los algoritmos EquipAsso [43, 42, 45] y MateTree [46] para las tareas 
+de Asociación y Clasificación propuestos por Timarán en [46] y sobre los cuales se 
+realizarón ciertas pruebas para medir su rendimiento.  El resto de este documento 
+esta organizado de la siguiente manera. En la primera sección se especifica el tema 
+de la propuesta, se lo enmarca dentro de una línea de investigación y se lo delimita. A 
+
+16
+
+continuación  se  describe  el  problema objeto  de  estudio,  luego  se  especifican  los 
+objetivos  generales  y  específicos  del  proyecto  y  finalmente  la  justificación.  En  la 
+sección 2 se presenta el estado general del arte en el área de integración de DCBD y 
+SGBD. En la  sección 3 se desarrolla  todo lo concerniente  al  análisis  orientado a 
+objetos UML que se realizo para construir la herramienta, en la sección 4 se presenta 
+la implementación del proyecto, en la sección 5 se presenta las pruebas hechas y 
+resultados, y finalmente en la sección 6 se presenta las conclusiones de este trabajo.
+
+
+6.  CONCLUSIONES Y TRABAJOS FUTUROS
+
+En este proyecto se diseñó e implementó una herramienta débilmente acoplada con 
+el SGBD PostgreSQL que da soporte a las etapas de conexión, preprocesamiento, 
+minería y visualización del  proceso KDD.  Igualmente se incluyeron en el  estudio 
+nuevos  algoritmos  de  asociación  y  clasificación  propuestos  por  Timaran 
+[42,43,44,45].
+
+Para el desarrollo del proyecto se hizo un análisis de varias herramientas de software 
+libre que abordan tareas similares a las que se pretendió en este trabajo. Se identificó 
+las limitaciones y virtudes de estas aplicaciones y se diseñó una metodología para el 
+desarrollo de una herramienta que cubriera las falencias encontradas.
+
+Se incluyó en TariyKDD mejoras en la conexión a bases de datos implementando un 
+interfaz que permite la selección visual de atributos y el establecimiento de relaciones 
+entre diferentes tablas pertenecientes a una misma base de datos.  Se implementó 
+nuevos algoritmos de asociación y clasificación ausentes en otras herramientas como 
+FPGrowth,  EquipAsso  y  Mate.   Igualmente  se  construyó  visores  que  permiten  la 
+interacción directa con los resultados obtenidos a través de tablas ordenadas, arboles 
+jerarquizados y gráficos de distribución.
+
+Se establecieron patrones de diseño que hicieron posible el acoplamiento de nuevas 
+funcionalidades  a  cada  uno  de  los  módulos  que  lo  componen,  facilitando  así  la 
+inclusión futura de nuevas características y el mejoramiento continuo de la aplicación, 
+así  como la implementación de un sistema de control  de versiones que facilita  el 
+trabajo colaborativo y permite el acceso a la herramienta a través de Internet.
+
+La  construcción  de  TariyKDD  comprendió  el  desarrollo  de  cuatro  módulos  que 
+cubrieron: 
+
+El  módulo  de conexión  a datos,  tanto a archivos planos como a bases de datos 
+relacionales.
+
+El módulo de utilidades, que contiene una colección de clases y librerías comunes 
+usadas en toda la aplicación.
+
+El  módulo  de  kernel,  que  incluye  la  etapas  de:  preprocesamiento,  donde  se 
+implementaron 9 filtros para la selección, transformación y preparación de los datos, 
+el  proceso  de  minería,  que  comprendió  tareas  de  asociación  y  clasificación, 
+implementando 5 algoritmos, Apriori, FPGrowth y EquipAsso para asociación y C4.5 y 
+Mate para clasificación y el proceso de visualización de resultados, utilizando tablas y 
+árboles para generar reportes de los resultados y reglas obtenidas.
+
+Por  último,  el  módulo  de  interfaz  gráfica  de  usuario  que  provee  una  interacción 
+amigable sobre los demás componentes por parte del usuario.
+
+201
+
+
+
+
+Se incluyó un módulo para la predicción de nuevos registros a partir de los modelos 
+construidos con los algoritmos de clasificación.  
+
+Se  desarrolló  un  modelo  de  datos  que  facilitó  la  aplicación  de  algoritmos  de 
+asociación sobre bases de datos enmarcadas en el concepto de canasta de mercado 
+donde la longitud de cada transacción es variable.
+
+El desarrollo de TariyKDD fue logrado usando en su totalidad herramientas de código 
+abierto y software libre.
+
+Se realizaron pruebas para evaluar la validez de los algoritmos implementados.  Para 
+el plan de pruebas de la tarea de asociación, se utilizaron conjuntos de datos reales 
+de las ventas de un supermercado de la Caja de Compensación Familiar de Nariño 
+compuesta por 85.692 transacciones.  Para Clasificación, se trabajó con la base de 
+datos  histórica  de  los  estudiantes  de  la  Universidad  de  Nariño,  compuesta  por 
+información personal y académica de 20.328 estudiantes.
+
+Como resultado de las pruebas para la tarea de clasificación se concluye que es 
+recomendable el uso del algoritmo C4.5 para conjuntos de datos extensos donde el 
+número de atributos a analizar sea grande.  Solo bajo conjuntos de datos pequeños y 
+con reducido número de atributos resulta viable aplicar el algoritmo  Mate  bajo una 
+arquitectura débilmente acoplada.
+
+Como  resultado  de  las  pruebas  para  Asociación  se  concluye  que  los  algoritmos 
+FPGrowth y  EquipAsso obtienen buenos tiempos de respuesta al ser aplicados en 
+conjuntos grandes pero a medida que se disminuye el criterio de soporte se ve un 
+mejor comportamiento por parte del  algoritmo  EquipAsso.   No es viable aplicar  el 
+algoritmo Apriori  bajo conjuntos grandes limitando su uso a muestras pequeñas de 
+datos.
+
+Este proyecto complementa el trabajo “Proyecto TARIY – Un Análisis de Rendimiento 
+de  Algoritmos   para   Reglas  de  Asociación”  [36]  que  fue  ganador   de  la  VII 
+Convocatoria Alberto Quijano Guerrero de proyectos de investigación estudiantil en la 
+categoría de Investigación Cuantitativa presentado por los mismos autores.
+
+Este  proyecto  hizo  parte  de  los  proyectos  financiados  por  el  Sistema  de 
+Investigaciones de la Universidad de Nariño dentro del marco del Concurso de Tesis 
+de Pregrado organizado en el año 2006.  
+
+Durante el  desarrollo  del  proyecto  se participó activamente en eventos regionales 
+como el Día Internacional del Software Libre y la Semana de Ingeniería.
+
+Como resultado de este proyecto se publicó y presentó un artículo internacional en el 
+marco del XXXII Congreso Latinoamericano de Estudios Informáticos - CLEI 2006 
+realizado en la ciudad de Santiago de Chile [40].
+
+202
+
+
+
+
+Se cuenta con una versión estable de TariyKDD con la capacidad de extraer reglas 
+asociación y clasificación bajo una arquitectura débilmente acoplada con el  SGBD 
+PostgreSQL desarrollada bajo los lineamientos del software libre.
+
+Una vez que se han descrito  los resultados más relevantes que se han obtenido 
+durante la realización de este proyecto,  se sugiere una serie de recomendaciones 
+como punto de partida para trabajos futuros:
+
+• Realizar  mayores  pruebas  de  rendimiento  de  esta  arquitectura  con  otros 
+repositorios de datos reales.
+
+• Implementar otras primitivas que Timaran propone para tareas de Asociación y 
+Clasificación.
+
+• Implementar otras tareas y algoritmos de minería de datos, como clustering y 
+patrones secuenciales.
+
+• Implementar  nuevos  filtros  e  interfaces  de  visualización  que  permitan  el 
+mejoramiento continuo de TariyKDD.
+
+• Acoplar gráficos estadísticos a los conjuntos de datos cargados para obtener 
+una información inicial de sus características.
+
+• Acoplar TariyKDD fuertemente con PostgreKDD.
+
+• Disponer de la herramienta como material de apoyo a las electivas de base de 
+datos dentro del programa de Ingeniería de Sistemas.
+
+ 
+• Liberar, compartir y difundir una versión estable de TariyKDD con la capacidad 
+
+de descubrir conocimiento en bases de datos. 
+
+• Asegurar la continuidad del proyecto. 
+
+Finalmente, este trabajo permitió aplicar los conocimientos adquiridos en el programa 
+de Ingeniería de Sistemas y en especial los de la electiva de bases de datos, así 
+como el trabajo y aprendizaje dentro del Grupo de Investigación GRiAS Línea KDD.
+
